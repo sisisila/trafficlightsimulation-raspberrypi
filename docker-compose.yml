@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+    TrafficOffense:
+        image: trafficoffense
+        container_name: trafficoffense
+        build:
+            context: .
+            dockerfile: ./TrafficOffense/Dockerfile
+        environment:
+            - FLASK_APP=program.py 
+            - FLASK_ENV=development  
+        ports:
+            - 5081:80
+    WeatherConditions:
+        image: weatherconditions
+        container_name: weatherconditions
+        build:
+            context: .
+            dockerfile: ./WeatherConditions/Dockerfile
+        environment:  
+            - FLASK_APP=program.py 
+            - FLASK_ENV=development
+        ports:
+            - 5080:80
+    MQTT-broker:
+        image: eclipse-mosquitto:latest
+        container_name: mosquitto_broker
+        ports:
+            - 1883:1883
+            - 9001:9001
+        volumes:
+            - ./mosquitto/config:/mosquitto/config
+            - ./mosquitto/data:/mosquitto/data
+            - ./mosquitto/log:/mosquitto/log
+        networks:
+            - backend
+networks:
+    backend:
+        name: mqtt_net
+        driver: bridge
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <meta http-equiv="refresh" content="3">
+    </head>
+    <body>
+        <h1>Dashboard</h1>
+        <br/>
+        {% if weather_data is not none or traffic_data is not none %}
+
+            <h3>---Weather Data---</h3>
+            {% if weather_data is not none %}
+                <p>Postal Code: {{ weather_data['Postal_Code'] }}</p>
+                <p>Temperature: {{ weather_data['Temperature'] }}°C</p>
+                <p>Conditions: {{ weather_data['Conditions']['type'] }} ({{ weather_data['Conditions']['intensity'] }})</p>
+                <p>Date: {{ weather_data['Date'] }}</p>
+
+                <br/>
+            {% endif %}
+
+            <h3>---Collision Data---</h3>
+            {% if traffic_data is not none %}
+                <p>Postal Code: {{ traffic_data['Postal_Code'] }}</p>
+                <p>Detection: {{ traffic_data['Detection']['type'] }} ({{ traffic_data['Detection']['value'] }})</p>
+                <p>Date: {{ traffic_data['Date'] }}</p>
+                
+                <!-- <img src="{{url_for('static', filename='trafficCollision.jpg')}}"/> -->
+                <br/>
+
+            {% endif %}
+
+            <h3>---Traffic Offense Data---</h3>
+            {% if traffic_offense_data is not none %}
+                <p>
+                    {{ traffic_offense_data['Message'] }}
+                </p>
+                <!-- <img src="{{url_for('static', filename='trafficOffense.jpg')}}"/> -->
+                
+            {% endif %}
+
+        {% else %}
+            <p> Please wait while data is loading </p>
+        {% endif %}
+    </body>
+</html>
