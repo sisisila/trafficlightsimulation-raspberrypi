@@ -1,5 +1,5 @@
 # TeamAssignment2-DataComm
-Made in 2023 by Sila Ben Khelifa and Monica Dimitrova
+Originally made in 2023 on GitLab by Sila Ben Khelifa and Monica Dimitrova
 
 ## Setup:
 In the root of the project
